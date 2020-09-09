@@ -15,4 +15,13 @@ election_small <- election2016 %>%
 election_small$winner_binary <- ifelse(election_small$winner == "Trump", 1, 0)
 
 election_small <- merge(election_small, TrumpSearch, by="state")
-cor(election_small$TrumpSearch, election_small$winner_binary)
+election_small <- merge(election_small, ClintonSearch, by="state")
+election_small <- merge(election_small, wikileakssearch, by="state")
+election_small <- merge(election_small, BillClinton, by="state")
+election_small <- merge(election_small, FacebookSearch, by="state")
+
+plot(election_small$wikileaks, election_small$winner_binary)
+plot(election_small$ClintonSearch, election_small$winner_binary)
+plot(election_small$TrumpSearch, election_small$winner_binary)
+plot(election_small$BillClinton, election_small$winner_binary)
+plot(election_small$facebook, election_small$winner_binary)
