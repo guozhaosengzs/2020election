@@ -41,7 +41,8 @@ changed_ds = changed_ds[changed_ds$state != "0",]
 
 house_changes_fin = left_join(district_state, changed_ds, by = "state")
 house_changes_fin = house_changes_fin %>% mutate_all(~replace(., is.na(.), 0))
-
+house_changes_fin$ratio = house_changes_fin$switched / house_changes_fin$total
+sum(house_changes_fin$total)
 # Senate Election data
 senate_04_08 = senate %>% 
   filter(year == 2004 | year == 2006 | year == 2008) %>% 
