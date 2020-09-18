@@ -26,15 +26,17 @@ house_10_14 = house_10_14[order(house_10_14[,'ID']),]
 house_2010 = subset(house_10_14, house_10_14$year == 2010)
 house_2014 = subset(house_10_14, house_10_14$year == 2014)
 house_compare = inner_join(house_2010, house_2014, by = "ID")
-house_compare$changed = if_else(house_compare$party.x == house_compare$party.y, 0, 1)
-house_compare = house_compare %>% mutate(changed = ifelse(changed == 0, 0, state_po.y))
+house_compare$rep_gain <- ifelse(temp$party.x == temp$party.y, 0, ifelse(temp$party.x == "democrat", 1, -1))
 
 
 district_state = data.frame(table(house_2014$state_po))
 names(district_state)[1] = "state"
 names(district_state)[2] = "total"
 
-changed_ds = data.frame(table(house_compare$changed))
+temp = house_compare %>% group_by()
+changed_ds = rename(count(house_compare, state_po.y, rep_gain), changes = n)
+
+changed_ds = data.frame(table(house_compare$rep_gain))
 names(changed_ds)[1] = "state"
 names(changed_ds)[2] = "switched"
 changed_ds = changed_ds[changed_ds$state != "0",]
@@ -43,6 +45,7 @@ house_changes_fin = left_join(district_state, changed_ds, by = "state")
 house_changes_fin = house_changes_fin %>% mutate_all(~replace(., is.na(.), 0))
 house_changes_fin$ratio = house_changes_fin$switched / house_changes_fin$total
 sum(house_changes_fin$total)
+
 # Senate Election data
 senate_04_08 = senate %>% 
   filter(year == 2004 | year == 2006 | year == 2008) %>% 
