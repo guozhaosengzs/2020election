@@ -3,9 +3,9 @@ library(tidyverse)
 library(arsenal)
 
 
-senate = read_csv('/Users/gzs/Desktop/MATH 503/2020election/z/senate_state.csv')
-house = read_csv('/Users/gzs/Desktop/MATH 503/2020election/z/house_district.csv')
-president = read_csv('/Users/gzs/Desktop/MATH 503/2020election/z/president_state.csv')
+senate = read_csv('/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/senate_state.csv')
+house = read_csv('/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/house_district.csv')
+president = read_csv('/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/president_state.csv')
 
 
 #### "Swing" Analysis #####
