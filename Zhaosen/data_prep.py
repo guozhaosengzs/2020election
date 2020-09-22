@@ -47,7 +47,7 @@ def house(df):
 
 
 def potus(df):
-    years = [2012, 2016]
+    years = [2008, 2012, 2016]
     states = ['PA', 'AZ']
     st_dfs = []
 
