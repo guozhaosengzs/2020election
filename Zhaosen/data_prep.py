@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def house(df):
-    years = [2006, 2010, 2014, 2018]
+    years = [2002, 2006, 2010, 2014, 2018]
     states = ['PA', 'AZ']
     st_dfs = []
 
@@ -47,7 +47,7 @@ def house(df):
 
 
 def potus(df):
-    years = [2008, 2012, 2016]
+    years = [2004, 2008, 2012, 2016]
     states = ['PA', 'AZ']
     st_dfs = []
 
