@@ -71,3 +71,8 @@ seats_10_14 = rename(count(senate_10_14, state_po, party), seats = n)
 seats_10_14 = seats_10_14[-2,]
 seats_10_14[1,3] = 2           
 
+
+pa_house$potus2016 = c(2970733, 2926441)
+az_house$potus2016 = c(1252401, 1161167)
+
+
