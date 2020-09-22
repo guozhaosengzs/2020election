@@ -24,24 +24,24 @@ def house(df):
 
     return st_dfs
 
-def senate(df):
-    years = [2012, 2016]
-    states = ['PA', 'AZ']
-    st_dfs = []
-
-    for st in states:
-        st_df = pd.DataFrame(columns=['RD_vote_r'], index=[2012, 2016])
-
-        for yr in years:
-            subset = df.loc[(df['year'] == yr) & (df['state_po'] == st)]
-            subset = subset[['state_po', 'party', 'candidatevotes']]
-            subset = subset.groupby(['party'])[['candidatevotes']].agg('sum')
-
-            st_df.loc[yr, 'RD_vote_r'] = int(subset.loc['republican']) / int(subset.loc['democrat'])
-
-        st_dfs.append(st_df)
-
-    return st_dfs
+# def senate(df):
+#     years = [2012, 2016]
+#     states = ['PA', 'AZ']
+#     st_dfs = []
+#
+#     for st in states:
+#         st_df = pd.DataFrame(columns=['RD_vote_r'], index=[2012, 2016])
+#
+#         for yr in years:
+#             subset = df.loc[(df['year'] == yr) & (df['state_po'] == st)]
+#             subset = subset[['state_po', 'party', 'candidatevotes']]
+#             subset = subset.groupby(['party'])[['candidatevotes']].agg('sum')
+#
+#             st_df.loc[yr, 'RD_vote_r'] = int(subset.loc['republican']) / int(subset.loc['democrat'])
+#
+#         st_dfs.append(st_df)
+#
+#     return st_dfs
 
 
 
@@ -103,10 +103,15 @@ def main():
     potus_raw = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/president_state.csv', encoding = "ISO-8859-1")
 
 
-    # pa_house, az_house = house(house_raw)
+    pa_house, az_house = house(house_raw)
+    pa_house.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/pa_house.csv')
+    az_house.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/az_house.csv')
+
+
     # pa_senate, az_senate = senate(senate_raw)
-    # pa_potus, az_potus = potus(potus_raw)
-    senate(senate_raw)
+    pa_potus, az_potus = potus(potus_raw)
+    pa_potus.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/pa_potus.csv')
+    az_potus.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/az_potus.csv')
 
 
 
