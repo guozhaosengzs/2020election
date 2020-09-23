@@ -26,25 +26,21 @@ def house(df):
 
 
 def senate(df):
-    years1 = [2000, 2006, 2012, 2018]
-    years3 = [1998, 2004, 2010, 2016]
+    years1 = [2006, 2012, 2018]
+    years3 = [2004, 2010, 2016]
     states = ['PA', 'AZ']
     st_dfs = []
 
     for st in states:
-        st_df = pd.DataFrame(columns=['RD_vote_r', 'Class'], index=[1998, 2000, 2004, 2006, 2010, 2012, 2016, 2018])
+        st_df = pd.DataFrame(columns=['RD_vote_r', 'Class'], index=[2004, 2006, 2010, 2012, 2016, 2018])
 
         for yr in years1:
-            if yr == 2000 and st == 'AZ':
-                st_df.loc[yr, 'RD_vote_r'] = 3.83558994197
-                st_df.loc[yr, 'Class'] = 1
-            else:
-                subset = df.loc[(df['year'] == yr) & (df['state_po'] == st)]
-                subset = subset[['state_po', 'party', 'candidatevotes']]
-                subset = subset.groupby(['party'])[['candidatevotes']].agg('sum')
+            subset = df.loc[(df['year'] == yr) & (df['state_po'] == st)]
+            subset = subset[['state_po', 'party', 'candidatevotes']]
+            subset = subset.groupby(['party'])[['candidatevotes']].agg('sum')
 
-                st_df.loc[yr, 'RD_vote_r'] = int(subset.loc['republican']) / int(subset.loc['democrat'])
-                st_df.loc[yr, 'Class'] = 1
+            st_df.loc[yr, 'RD_vote_r'] = int(subset.loc['republican']) / int(subset.loc['democrat'])
+            st_df.loc[yr, 'Class'] = 1
 
         for yr in years3:
             subset = df.loc[(df['year'] == yr) & (df['state_po'] == st)]
@@ -61,12 +57,12 @@ def senate(df):
 
 
 def potus(df):
-    years = [2000, 2004, 2008, 2012, 2016]
+    years = [2004, 2008, 2012, 2016]
     states = ['PA', 'AZ']
     st_dfs = []
 
     for st in states:
-        st_df = pd.DataFrame(columns=['RD_vote_r'], index=[2000, 2004, 2008, 2012, 2016])
+        st_df = pd.DataFrame(columns=['RD_vote_r'], index=[2004, 2008, 2012, 2016])
 
         for yr in years:
             subset = df.loc[(df['year'] == yr) & (df['state_po'] == st)]
@@ -94,9 +90,9 @@ def main():
     pa_senate.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/pa_senate.csv')
     az_senate.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/az_senate.csv')
 
-    pa_potus, az_potus = potus(potus_raw)
-    pa_potus.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/pa_potus1.csv')
-    az_potus.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/az_potus1.csv')
+    # pa_potus, az_potus = potus(potus_raw)
+    # pa_potus.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/pa_potus1.csv')
+    # az_potus.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/az_potus1.csv')
 
 
 
