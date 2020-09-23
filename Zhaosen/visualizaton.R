@@ -89,13 +89,10 @@ az_h_graphN
 
 #### PA Senate vs Presidential ####
 pa_senate <- read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/data/pa_senate.csv')
-pa_potus1 <- read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/data/pa_potus1.csv')
-
 names(pa_senate)[names(pa_senate)=="X1"] <- "Year"
-names(pa_potus1)[names(pa_potus1)=="X1"] <- "Year"
 pa_senate$Year <- as.factor(pa_senate$Year)
 pa_senate$Class <- as.factor(pa_senate$Class)
-pa_potus1$Year <- as.factor(pa_potus1$Year)
+pa_potus$Year <- as.factor(pa_potus$Year)
 
 pa_senate_c1 = pa_senate %>% filter(Class == 1)
 pa_senate_c3 = pa_senate %>% filter(Class == 3)
@@ -103,8 +100,8 @@ pa_s_graph <- ggplot() +
   geom_line(data = pa_senate_c1, aes(x = Year, y = RD_vote_r, group = 1)) +
   geom_line(data = pa_senate_c3, aes(x = Year, y = RD_vote_r, group = 1)) +
   
-  geom_line(data = pa_potus1, aes(x = Year, y = RD_vote_r, group = 1), color = "red") +
-  geom_point(data = pa_potus1, aes(x = Year, y = RD_vote_r, group = 1)) +
+  geom_line(data = pa_potus, aes(x = Year, y = RD_vote_r, group = 1), color = "red") +
+  geom_point(data = pa_potus, aes(x = Year, y = RD_vote_r, group = 1)) +
   
   geom_point(data = pa_senate, aes(x = Year, y = RD_vote_r, group = 1), shape = 17) +
   
@@ -115,30 +112,22 @@ pa_s_graph
 
 #### AZ Senate vs Presidential ####
 az_senate <- read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/data/az_senate.csv')
-az_potus1 <- read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/data/az_potus1.csv')
-
 names(az_senate)[names(az_senate)=="X1"] <- "Year"
-names(az_potus1)[names(az_potus1)=="X1"] <- "Year"
 az_senate$Year <- as.factor(az_senate$Year)
 az_senate$Class <- as.factor(az_senate$Class)
-az_potus1$Year <- as.factor(az_potus1$Year)
-
-
 
 az_senate_c1 = az_senate %>% filter(Class == 1)
 az_senate_c3 = az_senate %>% filter(Class == 3)
 az_s_graph <- ggplot() +
   geom_line(data = az_senate_c1, aes(x = Year, y = RD_vote_r, group = 1)) +
   geom_line(data = az_senate_c3, aes(x = Year, y = RD_vote_r, group = 1)) +
-  geom_line(data = az_potus1, aes(x = Year, y = RD_vote_r, group = 1), color = "red") +
+  geom_line(data = az_potus, aes(x = factor(Year), y = RD_vote_r, group = 1), color = "red") +
   
-  geom_point(data = az_potus1, aes(x = Year, y = RD_vote_r, group = 1)) +
-  geom_point(data = az_senate, aes(x = Year, y = RD_vote_r, group = 1), shape = 17) +
-  
-  geom_polygon(data = az_senate, aes(x=Year, y = RD_vote_r), fill="pink", alpha=.5) +
+  geom_point(data = az_potus, aes(x = factor(Year), y = RD_vote_r, group = 1)) +
+  geom_point(data = az_senate, aes(x = factor(Year), y = RD_vote_r, group = 1), shape = 17) +
   
   geom_hline(yintercept=1) +
   scale_x_discrete(name ="Year", limits=factor(c(2004,2006,2008,2010,2012,2014,2016,2018,2020)))
 
 az_s_graph
-    
+  
