@@ -28,8 +28,7 @@ pa_h_graph <- ggplot() +
   geom_line(data = pa_p_2008, mapping = aes(x = factor(Year), y = RD_vote_r, group=1), color = "blue", size = 2, linetype = "solid") +
   geom_line(data = pa_p_2012, mapping = aes(x = factor(Year), y = RD_vote_r, group=1), color = "red", size = 2, linetype = "longdash") +
   geom_line(data = pa_p_2016, mapping = aes(x = factor(Year), y = RD_vote_r, group=1), color = "red", size = 2, linetype = "dotdash") +
-  geom_line(mapping = aes(x = factor(c(2016, 2020)), y = c(1.0151351, 0.85), group=1), color = "blue", size = 2, linetype = "dotted") +
-  geom_point(data = pa_potus, mapping = aes(x = factor(Year), y = RD_vote_r, shape = "Presidential Election"), size = 8) +
+  geom_segment(mapping=aes(x = factor(2016), y = c(1.0151351), xend=factor(2020), yend=0.85), arrow = arrow(length = unit(0.7, "cm"), type="closed"), size=1.5, color="blue", linetype = "dotted") +  geom_point(data = pa_potus, mapping = aes(x = factor(Year), y = RD_vote_r, shape = "Presidential Election"), size = 8) +
   
   
   geom_hline(yintercept=1)+
@@ -43,6 +42,7 @@ pa_h_graph <- ggplot() +
   theme(plot.title = element_text(hjust = 0.5))
 
 pa_h_graph
+
 
 
 
@@ -76,7 +76,7 @@ az_h_graph <- ggplot() +
   geom_line(data = az_p_2008, mapping = aes(x = factor(Year), y = RD_vote_r, group=1), color = "blue", size = 2, linetype = "solid") +
   geom_line(data = az_p_2012, mapping = aes(x = factor(Year), y = RD_vote_r, group=1), color = "red", size = 2, linetype = "longdash") +
   geom_line(data = az_p_2016, mapping = aes(x = factor(Year), y = RD_vote_r, group=1), color = "blue", size = 2, linetype = "dotdash") +
-  geom_segment(mapping=aes(x = factor(2016), y = c(1.078532), xend=factor(2020), yend=0.90), arrow=arrow(), size=2, color="blue") +
+  geom_segment(mapping=aes(x = factor(2016), y = c(1.078532), xend=factor(2020), yend=0.90), arrow = arrow(length = unit(0.7, "cm"), type="closed"), size=1.5, color="blue", linetype = "dotted") +
   geom_point(data = az_potus, mapping = aes(x = factor(Year), y = RD_vote_r, shape = "Presidential Election"), size = 8) +
   
   
@@ -91,9 +91,3 @@ az_h_graph <- ggplot() +
   theme(plot.title = element_text(hjust = 0.5))
 
 az_h_graph
-
-
-
-
-geom_line(mapping = aes(x = factor(c(2016, 2020)), y = c(1.078532, 0.90), group=1), color = "blue", size = 2, linetype = "dotted") +
-  
