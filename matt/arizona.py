@@ -20,7 +20,7 @@ listy = ['Trump', 'Clinton', 'CNN', 'WikiLeaks',
 dfs = []
 
 for item in listy:
-    pytrend.build_payload(kw_list=[item], geo='US',
+    pytrend.build_payload(kw_list=[item], geo='US-AZ',
                           timeframe='2016-09-01 2016-11-01')
 
     dfs.append(pytrend.interest_by_region())
@@ -30,4 +30,4 @@ df_final = dfs[0]
 for df in dfs[1:]:
     df_final = df_final.join(df, how='inner')
     
-df_final.to_csv('state_searches.csv')
+df_final.to_csv('az_searches.csv')
