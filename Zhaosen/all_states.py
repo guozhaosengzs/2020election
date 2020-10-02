@@ -78,13 +78,6 @@ def main():
     house_yrs = sorted(house_df.Year.unique())
     potus_yrs = sorted(potus_df.Year.unique())
 
-    # hy0 = 'Year == ' + str(house_yrs[1]) + ' & ' + 'State == "' + states[1] + '"'
-    # hy1 = 'Year == ' + str(house_yrs[2]) + ' & ' + 'State == "' + states[1] + '"'
-    # a = house_df[(house_df.Year == 2006) & (house_df.State == 'AK')].RD_vote_r.item()
-    #
-    # print(house_yrs)
-    # print(potus_yrs)
-
     for st in states:
         for i in range(len(potus_yrs)):
 
@@ -104,8 +97,7 @@ def main():
 
             change_trend = change_trend.append(nrow, ignore_index=True)
 
-    print(change_trend.shape)
-    print(change_trend)
+    change_trend.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/trend_compare.csv')
 
 
 if __name__ == '__main__':
