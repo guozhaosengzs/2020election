@@ -60,31 +60,52 @@ def potus(df):
 
 
 def main():
-    house_raw = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/house_district.csv', encoding = "ISO-8859-1")
-    house_df = house(house_raw)
+
+    # house_raw = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/house_district.csv', encoding = "ISO-8859-1")
+    # house_df = house(house_raw)
     # house_df.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/house_02_18.csv')
 
-    potus_raw = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/president_state.csv', encoding = "ISO-8859-1")
-    potus_df = potus(potus_raw)
+    # potus_raw = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/president_state.csv', encoding = "ISO-8859-1")
+    # potus_df = potus(potus_raw)
     # potus_df.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/potus_04_16.csv')
 
-    change_trend = pd.DataFrame(columns=['House', 'President', 'State', 'Type'])
+    # Using produced data from above
+    house_df = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/data/house_02_18.csv')
+    potus_df = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/data/potus_04_16.csv')
+
+    change_trend = pd.DataFrame(columns=['House', 'President', 'State', 'Class'])
     states = house_df.State.unique()
-    house_yrs = sorted(list(set(house_df.index.tolist())))
-    potus_yrs = sorted(list(set(potus_df.index.tolist())))
+    house_yrs = sorted(house_df.Year.unique())
+    potus_yrs = sorted(potus_df.Year.unique())
 
-    print(house_yrs, potus_yrs)
-    # for st in states:
-    #     for i in range(len(potus_yrs)):
-    #         hy0 = house_yrs[i]
+    # hy0 = 'Year == ' + str(house_yrs[1]) + ' & ' + 'State == "' + states[1] + '"'
+    # hy1 = 'Year == ' + str(house_yrs[2]) + ' & ' + 'State == "' + states[1] + '"'
+    # a = house_df[(house_df.Year == 2006) & (house_df.State == 'AK')].RD_vote_r.item()
     #
-    #         if i < 3:
-    #
-    #         else:
-    #
-    #         change_trend.append(new_row, ignore_index=True)
-    #
+    # print(house_yrs)
+    # print(potus_yrs)
 
+    for st in states:
+        for i in range(len(potus_yrs)):
+
+            hy0 = house_df[(house_df.Year == house_yrs[i]) & (house_df.State == st)].RD_vote_r.item()
+            hy1 = house_df[(house_df.Year == house_yrs[i + 1]) & (house_df.State == st)].RD_vote_r.item()
+            hdiff = hy1 - hy0
+
+            if i < 3:
+                py0 = potus_df[(potus_df.Year == potus_yrs[i]) & (potus_df.State == st)].RD_vote_r.item()
+                py1 = potus_df[(potus_df.Year == potus_yrs[i + 1]) & (potus_df.State == st)].RD_vote_r.item()
+                pdiff = py1 - py0
+
+                nrow = {'House': hdiff, 'President' : pdiff, 'State': st, 'Class': 'T'}
+
+            else:
+                nrow = {'House': hdiff, 'President' : None, 'State': st, 'Class': 'P'}
+
+            change_trend = change_trend.append(nrow, ignore_index=True)
+
+    print(change_trend.shape)
+    print(change_trend)
 
 
 if __name__ == '__main__':
