@@ -62,12 +62,29 @@ def potus(df):
 def main():
     house_raw = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/house_district.csv', encoding = "ISO-8859-1")
     house_df = house(house_raw)
-    house_df.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/house_02_18.csv')
+    # house_df.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/house_02_18.csv')
 
     potus_raw = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/president_state.csv', encoding = "ISO-8859-1")
     potus_df = potus(potus_raw)
-    print(potus_df.shape)
-    potus_df.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/potus_04_16.csv')
+    # potus_df.to_csv(r'/Users/gzs/Desktop/MATH 503/2020election/Zhaosen/data/potus_04_16.csv')
+
+    change_trend = pd.DataFrame(columns=['House', 'President', 'State', 'Type'])
+    states = house_df.State.unique()
+    house_yrs = sorted(list(set(house_df.index.tolist())))
+    potus_yrs = sorted(list(set(potus_df.index.tolist())))
+
+    print(house_yrs, potus_yrs)
+    # for st in states:
+    #     for i in range(len(potus_yrs)):
+    #         hy0 = house_yrs[i]
+    #
+    #         if i < 3:
+    #
+    #         else:
+    #
+    #         change_trend.append(new_row, ignore_index=True)
+    #
+
 
 
 if __name__ == '__main__':
