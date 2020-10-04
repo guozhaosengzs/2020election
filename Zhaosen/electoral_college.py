@@ -9,7 +9,21 @@ def main():
     electoral = state_votes()
     abbrev_electoral = {v: electoral[k] for k,v in dict.items()}
 
-    
+    dem_votes = 0
+    rep_votes = 0
+
+    for k,v in abbrev_electoral.items():
+        if k == 'DC':
+            dem_votes += v
+        else:
+            R_D_Ratio = data.loc[data['State'] == k].Pred_Ratio_2020.item()
+            if R_D_Ratio > 1:
+                rep_votes += v
+            else:
+                dem_votes += v
+
+    print("Electoral Votes for Prediction: \nDemocrat: ", dem_votes, "\nRepublican: ", rep_votes)
+
 
 def us_states():
     name_to_abbr = {
