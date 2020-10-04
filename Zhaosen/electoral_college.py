@@ -7,11 +7,13 @@ def main():
 
     dict = us_states()
     electoral = state_votes()
+    abbrev_electoral = {v: electoral[k] for k,v in dict.items()}
 
-
+    
 
 def us_states():
-    statename_to_abbr = {
+    name_to_abbr = {
+        'District of Columbia': 'DC',
         'Alabama': 'AL',
         'Montana': 'MT',
         'Alaska': 'AK',
@@ -66,6 +68,7 @@ def us_states():
 
     return name_to_abbr
 
+
 def state_votes():
     electoral_college = {
         "Alabama":9,
@@ -81,7 +84,7 @@ def state_votes():
         "Georgia":16,
         "Hawaii":4,
         "Idaho":4,
-        "Illinois":20,,
+        "Illinois":20,
         "Indiana":11,
         "Iowa":6,
         "Kansas":6,
@@ -122,6 +125,7 @@ def state_votes():
     }
 
     return electoral_college
+
 
 if __name__ == '__main__':
     main()
