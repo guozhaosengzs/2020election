@@ -31,8 +31,8 @@ output_whole$Pred_Ratio_2020_2 <- predict(lm, output_whole)
 output_output <- output_whole[,(names(output_whole) %in% c("State", "Pred_Ratio_2020", "Pred_Ratio_2020_2"))]
 output_output$agree <- (output_output$Pred_Ratio_2020 >= 1 & output_output$Pred_Ratio_2020_2 >= 1) | 
   (output_output$Pred_Ratio_2020 < 1 & output_output$Pred_Ratio_2020_2 < 1)
-output_output$avg_ratio <- output_output$Pred_Ratio_2020 * .6 + output_output$Pred_Ratio_2020_2 * .4
+output_output$avg_ratio <- output_output$Pred_Ratio_2020 * .5 + output_output$Pred_Ratio_2020_2 * .5
 output_output$reelection <- ifelse(output_output$avg_ratio > 1, TRUE, FALSE)
 
-write.csv(output_output, "output2.csv")
+write.csv(output_output, "output2prime.csv")
 
