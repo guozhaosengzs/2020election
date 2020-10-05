@@ -9,7 +9,7 @@ def main():
     dict = us_states()
     electoral = state_votes()
     abbrev_electoral = {v: electoral[k] for k,v in dict.items()}
-    
+
 
     preds = ['Pred_Ratio_2020', 'Pred_Ratio_2020_2', 'avg_ratio']
 
