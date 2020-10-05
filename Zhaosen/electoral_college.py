@@ -3,26 +3,32 @@ import pandas as pd
 
 
 def main():
-    data = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/data/output.csv')
+    # data = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/Zhaosen/data/output.csv')
+    data = pd.read_csv('https://raw.githubusercontent.com/guozhaosengzs/2020election/master/matt/output2.csv')
 
     dict = us_states()
     electoral = state_votes()
     abbrev_electoral = {v: electoral[k] for k,v in dict.items()}
+    
 
-    dem_votes = 0
-    rep_votes = 0
+    preds = ['Pred_Ratio_2020', 'Pred_Ratio_2020_2', 'avg_ratio']
 
-    for k,v in abbrev_electoral.items():
-        if k == 'DC':
-            dem_votes += v
-        else:
-            R_D_Ratio = data.loc[data['State'] == k].Pred_Ratio_2020.item()
-            if R_D_Ratio > 1:
-                rep_votes += v
-            else:
+    for pred in preds:
+
+        dem_votes = 0
+        rep_votes = 0
+
+        for k,v in abbrev_electoral.items():
+            if k == 'DC':
                 dem_votes += v
+            else:
+                R_D_Ratio = data.loc[data['State'] == k][pred].item()
+                if R_D_Ratio > 1:
+                    rep_votes += v
+                else:
+                    dem_votes += v
 
-    print("Electoral Votes for Prediction: \nDemocrat: ", dem_votes, "\nRepublican: ", rep_votes)
+        print("Electoral Votes for Prediction: \nDemocrat: ", dem_votes, "\nRepublican: ", rep_votes)
 
 
 def us_states():
