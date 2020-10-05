@@ -17,13 +17,13 @@ listy = ['Trump', 'CNN',
            'Dow Jones', 'Russia', 'China', 'NASDAQ', 'Biden',
            'Sleepy Joe', 'Breonna Taylor', 'George Floyd', 'wildfires',
            'COVID-19', 'coronavirus', 'social distancing', 'face masks',
-           'white supremacy']
+           'white supremacy', 'Trump covid']
 
 dfs = []
 
 for item in listy:
     pytrend.build_payload(kw_list=[item], geo='US',
-                          timeframe='2020-08-01 2020-9-29')
+                          timeframe='2020-08-01 2020-10-3')
 
     dfs.append(pytrend.interest_by_region())
     
